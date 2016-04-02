@@ -95,12 +95,16 @@ public class Average_degree {
                     }
                     //Create Nodes and edges based on the tags.
                     //If they already exist update the timestamps
-                    for(int i = 0; i < edges.size(); i++){
-                        twitter.add_Node(new Node(edges.get(i),time));               
-                        for(int x = 0; x < edges.size(); x++){
-                               if (x != i){
-                                    twitter.graph.get(i).add_edge(new Edge(edges.get(x),time));
-                               }          
+                    //This step will be skipped if the tweet only
+                    //Has one tag or less
+                    if(edges.size() > 1){
+                        for(int i = 0; i < edges.size(); i++){
+                            twitter.add_Node(new Node(edges.get(i),time));               
+                            for(int x = 0; x < edges.size(); x++){
+                                   if (x != i){
+                                        twitter.graph.get(i).add_edge(new Edge(edges.get(x),time));
+                                   }          
+                            }
                         }
                     }
                     /**Our cleanup starts here
